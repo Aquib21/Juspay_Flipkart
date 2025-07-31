@@ -17,7 +17,7 @@ This project automates the end-to-end purchase flow on [Flipkart](https://www.fl
 
 ## ✅ Automated Flow
 
-1. Open Chrome with a user profile (pre-logged in Flipkart)
+1. Open Chrome 
 2. Login using Mobile Number
 3. Wait for manual OTP entry
 4. Search product (e.g., "webcam")
