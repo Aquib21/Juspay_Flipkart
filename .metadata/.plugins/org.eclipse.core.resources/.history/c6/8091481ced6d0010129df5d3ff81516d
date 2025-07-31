@@ -1,0 +1,58 @@
+package tests;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
+
+import pages.HomePage;
+import pages.ProductPage;
+import pages.login_page;
+import utils.ConfigReader;
+import utils.driverOC;
+
+public class PaymentTest {
+	private WebDriver driver;
+	private login_page loginPage;
+	private HomePage homePage;
+
+	@BeforeClass
+	public void setup() {
+		ConfigReader.loadProperties(); // Load config first
+		driver = driverOC.initDriver();
+		driver.get(ConfigReader.get("baseUrl"));
+
+		loginPage = new login_page(driver);
+		homePage = new HomePage(driver);
+	}
+
+	@Test
+	public void loginAndSearchFlow() throws InterruptedException {
+		loginPage.clickLogin();
+		loginPage.enterPhoneNumber(ConfigReader.get("mobileNumber"));
+		loginPage.clickRequestOTP();
+
+		System.out.println("Please enter OTP manually within 60 seconds...");
+		Thread.sleep(60000); // manual OTP entry
+
+		// homePage.searchProduct(ConfigReader.get("productName"));
+	}
+@Test
+	public void searchAndAddProductToCart() throws InterruptedException {
+		HomePage home = new HomePage(driver);
+		ProductPage product = new ProductPage(driver);
+
+		// OTP login step assumed already completed manually
+
+		home.searchProduct();
+		Thread.sleep(3000); // Wait for results to load
+		home.selectProduct();
+		Thread.sleep(3000);
+		product.switchToProductTab();
+		Thread.sleep(2000);
+		product.addToCart();
+	}
+
+	@AfterClass
+	public void tearDown() {
+		driverOC.quitDriver();
+	}
+}

@@ -1,0 +1,22 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class PaymentPage {
+	WebDriver driver;
+
+	private By cvvInput = By.name("cvv"); // Adjust locator if needed
+	private By continuePaymentBtn = By.xpath("//button[.='Continue']");
+
+	public PaymentPage(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void completePayment(String cvv) throws InterruptedException {
+		Thread.sleep(2000); // wait for payment section
+		driver.findElement(cvvInput).sendKeys(cvv);
+		driver.findElement(continuePaymentBtn).click();
+	}
+
+}

@@ -1,0 +1,33 @@
+# --- Base Configuration ---
+baseUrl=https://www.flipkart.com/
+
+# --- Login Page Locators ---
+loginBtn=//span[text()='Login']
+phoneInput=//input[@type='text' and @class='r4vIwl mYpCuj BV+Dqf']
+requestOtpBtn=//button[contains(text(),'Request OTP')]
+
+# --- Home Page Locators ---
+searchBox=//input[@title='Search for Products, Brands and More']
+searchButton=//button[@type='submit']
+productLink=//a[contains(@href, 'zebronics-crystal-clear-0-3-webcam-built-in-microphone-night-vision-usb-connectivity')]
+addToCartBtn=//button[contains(text(),'Add to cart')]
+searchKeyword=webcam
+
+# --- Cart Page ---
+placeOrderBtn=//span[text()='Place Order']/ancestor::button
+
+# --- Address Page ---
+deliverHereBtn=//button[.='Deliver Here']
+
+# --- Order Summary Page ---
+continueBtnSummary=//button[.='CONTINUE']
+
+# --- Payment Page ---
+cvvInput=//input[@name='cvv']
+continueBtnPayment=//button[.='Continue']
+
+
+# --- Test Data ---
+mobileNumber=9154671933
+seachKeyword = webcam
+productName=webcam

@@ -1,0 +1,75 @@
+package tests;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.*;
+import pages.*;
+
+import utils.ConfigReader;
+import utils.driverOC;
+
+public class PaymentTest {
+    private WebDriver driver;
+    private login_page loginPage;
+    private HomePage homePage;
+    private ProductPage productPage;
+    private CartPage cartPage;
+    private AddressPage addressPage;
+    private OrderSummaryPage orderSummaryPage;
+    private PaymentPage paymentPage;
+
+    @BeforeClass
+    public void setup() {
+        ConfigReader.loadProperties();
+        driver = driverOC.initDriver();
+        driver.get(ConfigReader.get("baseUrl"));
+
+        loginPage = new login_page(driver);
+        homePage = new HomePage(driver);
+        productPage = new ProductPage(driver);
+        cartPage = new CartPage(driver);
+        addressPage = new AddressPage(driver);
+        orderSummaryPage = new OrderSummaryPage(driver);
+        paymentPage = new PaymentPage(driver);
+    }
+
+   // @Test(priority = 1)
+    public void loginWithOTP() throws InterruptedException {
+        loginPage.clickLogin();
+        loginPage.enterPhoneNumber(ConfigReader.get("mobileNumber"));
+        loginPage.clickRequestOTP();
+
+        System.out.println("⚠️ Please enter OTP manually within 30 seconds...");
+        Thread.sleep(30000); // Wait for manual OTP entry
+    }
+
+    @Test(priority = 2)
+    public void searchAndAddProductToCart() throws InterruptedException {
+        homePage.searchProduct();
+        Thread.sleep(3000);
+        homePage.selectProduct();
+
+        Thread.sleep(3000);
+        productPage.switchToProductTab();
+        Thread.sleep(2000);
+        productPage.addToCart();
+    }
+
+    @Test(priority = 3)
+    public void proceedToPaymentFlow() throws InterruptedException {
+        cartPage.clickPlaceOrder();
+
+        Thread.sleep(5000); // Wait for address page
+        addressPage.clickDeliverHere();
+
+        Thread.sleep(3000); // Wait for summary page
+        orderSummaryPage.clickContinueButton();
+
+        Thread.sleep(3000); // Wait for payment page
+        paymentPage.completePayment("000"); // Enter CVV
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driverOC.quitDriver();
+    }
+}

@@ -1,0 +1,29 @@
+package pages;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+public class login_page {
+
+	    WebDriver driver;
+
+	    public void LoginPage(WebDriver driver) {
+	        this.driver = driver;
+	    }
+
+	    By loginBtn = By.xpath("//span[text()='Login']");
+	    By phoneInput = By.cssSelector("input[type='text'][autocomplete='off']");
+	    By requestOtpBtn = By.xpath("//button[contains(text(),'Request OTP')]");
+
+	    public void clickLogin() {
+	        driver.findElement(loginBtn).click();
+	    }
+
+	    public void enterPhone(String phoneNum) {
+	        driver.findElement(phoneInput).sendKeys(phoneNum);
+	    }
+
+	    public void clickRequestOtp() {
+	        driver.findElement(requestOtpBtn).click();
+	    }
+	}
+
+

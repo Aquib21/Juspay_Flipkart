@@ -1,0 +1,11 @@
+# --- Base Configuration ---
+baseUrl=https://www.flipkart.com
+
+# --- Login Page Locators ---
+loginBtn=//span[text()='Login']
+phoneInput=input[type='text'][autocomplete='off']
+requestOtpBtn=//button[contains(text(),'Request OTP')]
+
+# --- Test Data ---
+mobileNumber=8853074052
+productName=webcam

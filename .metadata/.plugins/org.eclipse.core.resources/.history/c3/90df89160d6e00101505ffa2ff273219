@@ -1,0 +1,45 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class PaymentPage {
+	WebDriver driver;
+
+	// Locators
+	private By cardOption = By.xpath("//div[contains(@class, 'qsHXPi')]");
+	private By cardNumberInput = By.xpath("//input[contains(@class, 'z2D4XG') and @name='cardNumber']");
+	private By monthDropdown = By.xpath("//select[contains(@class, 't0BpJ3') and @name='month']");
+	private By yearDropdown = By.xpath("//select[@name='year' and contains(@class, 't0BpJ3')]");
+	private By cvvInput = By.xpath("//input[@type='password' and @name='cvv' and contains(@class,'v2VFa-')]");
+	private By payButton = By.xpath("//button[@type='button' and contains(text(),'PAY')]");
+
+	public PaymentPage(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void completePaymentWithCardDetails(String cardNumber, String month, String year, String cvv) throws InterruptedException {
+		Thread.sleep(2000); // Wait for payment section to load
+
+		// Select card payment option
+		driver.findElement(cardOption).click();
+		Thread.sleep(1000);
+
+		// Enter card number
+		driver.findElement(cardNumberInput).sendKeys(cardNumber);
+
+		// Select month and year from dropdowns
+		Select monthSelect = new Select(driver.findElement(monthDropdown));
+		monthSelect.selectByVisibleText(month);
+
+		Select yearSelect = new Select(driver.findElement(yearDropdown));
+		yearSelect.selectByVisibleText(year);
+
+		// Enter CVV
+		driver.findElement(cvvInput).sendKeys(cvv);
+
+		// Click PAY button
+		driver.findElement(payButton).click();
+	}
+}

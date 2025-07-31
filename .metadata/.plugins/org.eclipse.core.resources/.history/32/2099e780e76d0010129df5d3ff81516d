@@ -1,0 +1,33 @@
+package pages;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import utils.ConfigReader;
+public class login_page {
+
+
+	    private WebDriver driver;
+
+	    private By loginBtn = By.xpath(ConfigReader.get("loginBtn"));
+	    private By phoneInput = By.cssSelector(ConfigReader.get("phoneInput"));
+	    private By requestOtpBtn = By.xpath(ConfigReader.get("requestOtpBtn"));
+
+	    public login_page(WebDriver driver) {
+	        this.driver = driver;
+	    }
+
+	    public void clickLogin() {
+	        driver.findElement(loginBtn).click();
+	    }
+
+	    public void enterPhoneNumber(String number) {
+	        driver.findElement(phoneInput).sendKeys(number);
+	    }
+
+	    public void clickRequestOTP() {
+	        driver.findElement(requestOtpBtn).click();
+	    }
+	}
+
+
+
